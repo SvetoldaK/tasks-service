@@ -3,7 +3,7 @@ module tasks-service
 go 1.23.6
 
 require (
-	github.com/SvetoldaK/project-protos v0.0.0-20250526120039-0eac917d426b
+	github.com/SvetoldaK/project-protos v0.0.0-20250531092146-5a743ab5ea81
 	google.golang.org/grpc v1.72.2
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.30.0

@@ -93,3 +93,21 @@ func (h *Handler) DeleteTask(ctx context.Context, req *taskpb.DeleteTaskRequest)
 	}
 	return &taskpb.DeleteTaskResponse{Success: true}, nil
 }
+
+func (h *Handler) ListTasksByUser(ctx context.Context, req *taskpb.ListTasksByUserRequest) (*taskpb.ListTasksByUserResponse, error) {
+	tasks, err := h.svc.GetTasksByUserID(uint(req.UserId))
+	if err != nil {
+		return nil, err
+	}
+	var pbTasks []*taskpb.Task
+	for _, t := range tasks {
+		pbTasks = append(pbTasks, &taskpb.Task{
+			Id:    uint32(t.ID),
+			Title: t.Task,
+		})
+	}
+	return &taskpb.ListTasksByUserResponse{
+		Tasks:      pbTasks,
+		TotalCount: int32(len(pbTasks)),
+	}, nil
+}
